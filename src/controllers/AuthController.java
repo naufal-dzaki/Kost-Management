@@ -4,6 +4,8 @@ import models.User;
 
 import java.util.Scanner;
 
+import DAO.UserDAO;
+
 public class AuthController {
     private final UserDAO userDAO;
     private final Scanner scanner;

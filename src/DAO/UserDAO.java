@@ -1,4 +1,4 @@
-package controllers;
+package DAO;
 
 import config.DatabaseConnection;
 import models.User;
