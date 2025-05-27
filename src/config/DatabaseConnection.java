@@ -7,21 +7,18 @@ import java.sql.SQLException;
 public class DatabaseConnection {
     private static final String URL = "jdbc:mysql://localhost:3306/kost_db";
     private static final String USER = "root";
-    private static final String PASSWORD = "";
+    private static final String PASS = "";
 
-    public static Connection connect() {
-        Connection conn = null;
-        try {
-            conn = DriverManager.getConnection(URL, USER, PASSWORD);
-            System.out.println("✅ Koneksi ke database berhasil!");
-        } catch (SQLException e) {
-            System.out.println("❌ Koneksi gagal: " + e.getMessage());
+    private static Connection connection;
+
+    public static Connection getConnection() {
+        if (connection == null) {
+            try {
+                connection = DriverManager.getConnection(URL, USER, PASS);
+            } catch (SQLException e) {
+                System.out.println("Gagal koneksi ke database: " + e.getMessage());
+            }
         }
-        return conn;
-    }
-
-    // Untuk testing koneksi
-    public static void main(String[] args) {
-        connect();
+        return connection;
     }
 }
