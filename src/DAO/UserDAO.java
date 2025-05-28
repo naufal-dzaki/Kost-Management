@@ -38,10 +38,10 @@ public class UserDAO {
         return null;
     }
 
-    public boolean register(User user) {
+    public User register(User user) {
         try {
             String sql = "INSERT INTO users (username, password, role) VALUES (?, ?, ?)";
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             String hashedPassword = HashUtil.hashPassword(user.getPassword());
 
             stmt.setString(1, user.getUsername());
@@ -49,10 +49,17 @@ public class UserDAO {
             stmt.setString(3, user.getRole());
 
             int rowsInserted = stmt.executeUpdate();
-            return rowsInserted > 0;
+
+            if (rowsInserted > 0) {
+                ResultSet generatedKeys = stmt.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    int generatedId = generatedKeys.getInt(1);
+                    return new User(generatedId, user.getUsername(), hashedPassword, user.getRole());
+                }
+            }
         } catch (SQLException e) {
             System.out.println("Gagal registrasi: " + e.getMessage());
         }
-        return false;
+        return null;
     }
 }

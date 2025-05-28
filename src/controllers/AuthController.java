@@ -42,9 +42,11 @@ public class AuthController {
         System.out.print("Role (penghuni/pemilik): ");
         String role = scanner.nextLine();
 
-        User user = new User(username, password, role);
-
-        if (userDAO.register(user)) {
+        User newUser = new User(0, username, password, role);
+        User registeredUser = userDAO.register(newUser);
+        
+        if (registeredUser != null) {
+            newUser.setId(registeredUser.getId());
             System.out.println("Registrasi berhasil!");
         } else {
             System.out.println("Registrasi gagal.");

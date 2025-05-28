@@ -6,10 +6,8 @@ public class User {
     private String password;
     private String role;
 
-    // Constructor tanpa parameter
     public User() {}
 
-    // Constructor semua atribut
     public User(int id, String username, String password, String role) {
         this.id = id;
         this.username = username;
@@ -17,14 +15,6 @@ public class User {
         this.role = role;
     }
 
-    // Constructor tanpa ID (digunakan saat registrasi)
-    public User(String username, String password, String role) {
-        this.username = username;
-        this.password = password;
-        this.role = role;
-    }
-
-    // Getter dan Setter
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
@@ -36,9 +26,4 @@ public class User {
 
     public String getRole() { return role; }
     public void setRole(String role) { this.role = role; }
-
-    @Override
-    public String toString() {
-        return "User [ID=" + id + ", Username=" + username + ", Role=" + role + "]";
-    }
 }
