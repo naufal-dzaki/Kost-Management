@@ -1,4 +1,4 @@
-package DAO;
+package dao;
 
 import config.DatabaseConnection;
 import models.User;

@@ -13,7 +13,12 @@ public class Main {
             if (pilihan == 1) {
                 User user = authController.login();
                 if (user != null) {
+                    if (user.getRole().equals("penghuni")) {
+                        System.out.println("Login berhasil sebagai Penghuni");
+                    }
                     break;
+                } else {
+                    System.out.println("Login gagal, silakan coba lagi.");
                 }
             } else if (pilihan == 2) {
                 authController.register();
