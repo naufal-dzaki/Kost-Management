@@ -62,4 +62,16 @@ public class UserDAO {
         }
         return null;
     }
+
+    public boolean deleteUser(int id) {
+        try {
+            String sql = "DELETE FROM users WHERE id = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.out.println("Gagal hapus user: " + e.getMessage());
+            return false;
+        }
+    }
 }

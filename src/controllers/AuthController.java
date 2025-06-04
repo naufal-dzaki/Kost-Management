@@ -1,9 +1,9 @@
+// controllers/AuthController.java
 package controllers;
 
 import models.Pemilik;
 import models.Penghuni;
 import models.User;
-
 
 import java.util.Scanner;
 
@@ -23,9 +23,14 @@ public class AuthController {
     public User login() {
         System.out.println("=== LOGIN ===");
         System.out.print("Username: ");
-        String username = scanner.nextLine();
+        String username = scanner.nextLine().trim();
         System.out.print("Password: ");
-        String password = scanner.nextLine();
+        String password = scanner.nextLine().trim();
+
+        if (username.isEmpty() || password.isEmpty()) {
+            System.out.println("Username dan password tidak boleh kosong!");
+            return null;
+        }
 
         User user = userDAO.login(username, password);
 
@@ -41,14 +46,26 @@ public class AuthController {
     public void register() {
         System.out.println("=== REGISTER ===");
         System.out.print("Username: ");
-        String username = scanner.nextLine();
+        String username = scanner.nextLine().trim();
+        
+        if (username.isEmpty()) {
+            System.out.println("Username tidak boleh kosong!");
+            return;
+        }
+
         System.out.print("Password: ");
-        String password = scanner.nextLine();
+        String password = scanner.nextLine().trim();
+        
+        if (password.isEmpty()) {
+            System.out.println("Password tidak boleh kosong!");
+            return;
+        }
+
         System.out.print("Role (penghuni/pemilik): ");
-        String role = scanner.nextLine();
+        String role = scanner.nextLine().trim().toLowerCase();
 
         if (!role.equals("penghuni") && !role.equals("pemilik")) {
-            System.out.println("Role tidak valid.");
+            System.out.println("Role tidak valid. Harus 'penghuni' atau 'pemilik'.");
             return;
         }
 
@@ -57,42 +74,66 @@ public class AuthController {
 
         if (registeredUser != null) {
             if (role.equals("penghuni")) {
-                System.out.print("Nama: ");
-                String nama = scanner.nextLine();
-                System.out.print("No KTP: ");
-                String noKtp = scanner.nextLine();
-                System.out.print("ID Kamar (opsional): ");
-                String kamarInput = scanner.nextLine();
-                int idKamar = kamarInput.isEmpty() ? 0 : Integer.parseInt(kamarInput);
-
-                Penghuni penghuni = new Penghuni(
-                    registeredUser.getId(),
-                    username, password, role,
-                    nama, noKtp, idKamar
-                );
-
-                boolean success = new PenghuniDAO().insertPenghuni(penghuni);
-                System.out.println(success ? "Registrasi penghuni berhasil." : "Gagal simpan data penghuni.");
-
+                registerPenghuni(registeredUser);
             } else if (role.equals("pemilik")) {
-                System.out.print("Nama: ");
-                String nama = scanner.nextLine();
-                System.out.print("No HP: ");
-                String noHp = scanner.nextLine();
-                System.out.print("Alamat Kost: ");
-                String alamatKost = scanner.nextLine();
-
-                Pemilik pemilik = new Pemilik(
-                    registeredUser.getId(),
-                    username, password, role,
-                    nama, noHp, alamatKost
-                );
-
-                boolean success = new PemilikDAO().insertPemilik(pemilik);
-                System.out.println(success ? "Registrasi pemilik berhasil." : "Gagal simpan data pemilik.");
+                registerPemilik(registeredUser);
             }
         } else {
-            System.out.println("Registrasi gagal.");
+            System.out.println("Registrasi gagal. Username mungkin sudah digunakan.");
         }
+    }
+
+    private void registerPenghuni(User user) {
+        System.out.print("Nama lengkap: ");
+        String nama = scanner.nextLine().trim();
+        
+        if (nama.isEmpty()) {
+            System.out.println("Nama tidak boleh kosong!");
+            return;
+        }
+
+        System.out.print("No KTP: ");
+        String noKtp = scanner.nextLine().trim();
+        
+        if (noKtp.isEmpty()) {
+            System.out.println("No KTP tidak boleh kosong!");
+            return;
+        }
+
+        Penghuni penghuni = new Penghuni(
+            user.getId(),
+            user.getUsername(), user.getPassword(), user.getRole(),
+            nama, noKtp, 0  // idKamar = 0 (belum ada kamar)
+        );
+
+        boolean success = new PenghuniDAO().insertPenghuni(penghuni);
+        System.out.println(success ? "Registrasi penghuni berhasil." : "Gagal simpan data penghuni.");
+    }
+
+    private void registerPemilik(User user) {
+        System.out.print("Nama lengkap: ");
+        String nama = scanner.nextLine().trim();
+        
+        if (nama.isEmpty()) {
+            System.out.println("Nama tidak boleh kosong!");
+            return;
+        }
+
+        System.out.print("No HP: ");
+        String noHp = scanner.nextLine().trim();
+        
+        if (noHp.isEmpty()) {
+            System.out.println("No HP tidak boleh kosong!");
+            return;
+        }
+
+        Pemilik pemilik = new Pemilik(
+            user.getId(),
+            user.getUsername(), user.getPassword(), user.getRole(),
+            nama, noHp
+        );
+
+        boolean success = new PemilikDAO().insertPemilik(pemilik);
+        System.out.println(success ? "Registrasi pemilik berhasil." : "Gagal simpan data pemilik.");
     }
 }
