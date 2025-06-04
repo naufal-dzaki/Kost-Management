@@ -7,9 +7,9 @@ import models.User;
 
 import java.util.Scanner;
 
-import dao.PemilikDAO;
-import dao.PenghuniDAO;
-import dao.UserDAO;
+import DAO.PemilikDAO;
+import DAO.PenghuniDAO;
+import DAO.UserDAO;
 
 public class AuthController {
     private final UserDAO userDAO;

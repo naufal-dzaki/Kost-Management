@@ -1,9 +1,9 @@
 // controllers/PenghuniController.java
 package controllers;
 
-import dao.PenghuniDAO;
-import dao.UserDAO;
-import dao.KamarDAO;
+import DAO.PenghuniDAO;
+import DAO.UserDAO;
+import DAO.KamarDAO;
 import models.Penghuni;
 import models.User;
 import models.Kamar;

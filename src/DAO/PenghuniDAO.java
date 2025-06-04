@@ -1,5 +1,5 @@
 // dao/PenghuniDAO.java (lengkap)
-package dao;
+package DAO;
 
 import config.DatabaseConnection;
 import models.Penghuni;

@@ -1,8 +1,8 @@
 // controllers/TagihanController.java
 package controllers;
 
-import dao.PenghuniDAO;
-import dao.TagihanDAO;
+import DAO.PenghuniDAO;
+import DAO.TagihanDAO;
 import models.Tagihan;
 
 import java.util.List;

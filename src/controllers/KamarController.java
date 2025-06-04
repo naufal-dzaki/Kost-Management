@@ -1,7 +1,7 @@
 // controllers/KamarController.java
 package controllers;
 
-import dao.KamarDAO;
+import DAO.KamarDAO;
 import models.Kamar;
 
 import java.util.List;

@@ -1,5 +1,5 @@
 // dao/KamarDAO.java
-package dao;
+package DAO;
 
 import config.DatabaseConnection;
 import models.Kamar;
