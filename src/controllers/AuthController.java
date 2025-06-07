@@ -1,71 +1,62 @@
-// controllers/AuthController.java
+// controllers/AuthController.java (updated)
 package controllers;
 
 import models.Pemilik;
 import models.Penghuni;
 import models.User;
-
-import java.util.Scanner;
-
 import DAO.PemilikDAO;
 import DAO.PenghuniDAO;
 import DAO.UserDAO;
+import views.AuthView;
 
 public class AuthController {
     private final UserDAO userDAO;
-    private final Scanner scanner;
+    private final AuthView authView;
 
     public AuthController() {
         userDAO = new UserDAO();
-        scanner = new Scanner(System.in);
+        authView = new AuthView();
     }
 
     public User login() {
-        System.out.println("=== LOGIN ===");
-        System.out.print("Username: ");
-        String username = scanner.nextLine().trim();
-        System.out.print("Password: ");
-        String password = scanner.nextLine().trim();
+        String[] credentials = authView.getLoginCredentials();
+        String username = credentials[0];
+        String password = credentials[1];
 
         if (username.isEmpty() || password.isEmpty()) {
-            System.out.println("Username dan password tidak boleh kosong!");
+            authView.showLoginError();
             return null;
         }
 
         User user = userDAO.login(username, password);
 
         if (user != null) {
-            System.out.println("Login berhasil sebagai " + user.getRole());
+            authView.showLoginSuccess(user.getRole());
         } else {
-            System.out.println("Login gagal! Username atau password salah.");
+            authView.showLoginFailed();
         }
 
         return user;
     }
 
     public void register() {
-        System.out.println("=== REGISTER ===");
-        System.out.print("Username: ");
-        String username = scanner.nextLine().trim();
-        
+        String[] registerData = authView.getRegisterData();
+        String username = registerData[0];
+        String password = registerData[1];
+        String role = registerData[2];
+
         if (username.isEmpty()) {
-            System.out.println("Username tidak boleh kosong!");
+            authView.showRegisterError("Username tidak boleh kosong!");
             return;
         }
 
-        System.out.print("Password: ");
-        String password = scanner.nextLine().trim();
-        
         if (password.isEmpty()) {
-            System.out.println("Password tidak boleh kosong!");
+            authView.showRegisterError("Password tidak boleh kosong!");
             return;
         }
-
-        System.out.print("Role (penghuni/pemilik): ");
-        String role = scanner.nextLine().trim().toLowerCase();
 
         if (!role.equals("penghuni") && !role.equals("pemilik")) {
-            System.out.println("Role tidak valid. Harus 'penghuni' atau 'pemilik'.");
+            authView.showRegisterError("Role tidak valid. Harus 'penghuni' atau 'pemilik'.");
             return;
         }
 
@@ -78,54 +69,33 @@ public class AuthController {
             } else if (role.equals("pemilik")) {
                 registerPemilik(registeredUser);
             }
+            authView.showRegisterSuccess(role);
         } else {
-            System.out.println("Registrasi gagal. Username mungkin sudah digunakan.");
+            authView.showRegisterError("Registrasi gagal. Username mungkin sudah digunakan.");
         }
     }
 
     private void registerPenghuni(User user) {
-        System.out.print("Nama lengkap: ");
-        String nama = scanner.nextLine().trim();
-        
-        if (nama.isEmpty()) {
-            System.out.println("Nama tidak boleh kosong!");
-            return;
-        }
-
-        System.out.print("No KTP: ");
-        String noKtp = scanner.nextLine().trim();
-        
-        if (noKtp.isEmpty()) {
-            System.out.println("No KTP tidak boleh kosong!");
-            return;
-        }
+        String[] penghuniData = authView.getPenghuniData();
+        String nama = penghuniData[0];
+        String noKtp = penghuniData[1];
 
         Penghuni penghuni = new Penghuni(
             user.getId(),
             user.getUsername(), user.getPassword(), user.getRole(),
-            nama, noKtp, 0  // idKamar = 0 (belum ada kamar)
+            nama, noKtp, 0
         );
 
         boolean success = new PenghuniDAO().insertPenghuni(penghuni);
-        System.out.println(success ? "Registrasi penghuni berhasil." : "Gagal simpan data penghuni.");
+        if (!success) {
+            authView.showRegisterError("Gagal simpan data penghuni.");
+        }
     }
 
     private void registerPemilik(User user) {
-        System.out.print("Nama lengkap: ");
-        String nama = scanner.nextLine().trim();
-        
-        if (nama.isEmpty()) {
-            System.out.println("Nama tidak boleh kosong!");
-            return;
-        }
-
-        System.out.print("No HP: ");
-        String noHp = scanner.nextLine().trim();
-        
-        if (noHp.isEmpty()) {
-            System.out.println("No HP tidak boleh kosong!");
-            return;
-        }
+        String[] pemilikData = authView.getPemilikData();
+        String nama = pemilikData[0];
+        String noHp = pemilikData[1];
 
         Pemilik pemilik = new Pemilik(
             user.getId(),
@@ -134,6 +104,8 @@ public class AuthController {
         );
 
         boolean success = new PemilikDAO().insertPemilik(pemilik);
-        System.out.println(success ? "Registrasi pemilik berhasil." : "Gagal simpan data pemilik.");
+        if (!success) {
+            authView.showRegisterError("Gagal simpan data pemilik.");
+        }
     }
 }
