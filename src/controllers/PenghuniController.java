@@ -145,4 +145,25 @@ public class PenghuniController {
             penghuniView.showMessage("Gagal menempatkan penghuni di kamar.");
         }
     }
+
+    public void assignKamarPenghuni(Penghuni penghuni) {
+        int idPenghuni = penghuni.getId();
+        List<Kamar> availableRooms = kamarDAO.getAvailableKamar();
+        penghuniView.showAvailableRooms(availableRooms);
+
+        int idKamar = penghuniView.getRoomAssignmentChoice();
+        if (idKamar == 0) {
+            penghuniView.showMessage("Proses dibatalkan.");
+            return;
+        }
+
+        boolean success = penghuniDAO.updateKamarPenghuni(idPenghuni, idKamar);
+        if (success) {
+            kamarDAO.updateStatusKamar(idKamar, "terisi");
+            penghuni.setIdKamar(idKamar);
+            penghuniView.showMessage("Anda berhasil ditempatkan di kamar!");
+        } else {
+            penghuniView.showMessage("Gagal menempatkan penghuni di kamar.");
+        }
+    }
 }

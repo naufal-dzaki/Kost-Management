@@ -127,7 +127,7 @@ public class Main {
                     mainView.showTagihanPenghuni(tagihanList);
                     break;
                 case 3:
-                    penghuniController.assignKamar();
+                    penghuniController.assignKamarPenghuni(penghuni);
                     break;
                 case 4:
                     if (penghuni.getIdKamar() == 0) {

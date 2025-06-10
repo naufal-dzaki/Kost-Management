@@ -87,7 +87,7 @@ public class MainView {
         System.out.println("\n=== PROFIL PENGHUNI ===");
         System.out.println("Nama: " + nama);
         System.out.println("No KTP: " + noKtp);
-        System.out.println("Kamar: " + (idKamar != 0 ? "Kamar No. " + idKamar : "Belum memiliki kamar"));
+        System.out.println("Kamar: " + (idKamar != 0 ? "Kmr-" + idKamar : "Belum memiliki kamar"));
     }
 
     public void showTagihanPenghuni(List<Tagihan> tagihanList) {
