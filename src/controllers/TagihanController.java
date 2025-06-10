@@ -3,8 +3,10 @@ package controllers;
 
 import DAO.PenghuniDAO;
 import DAO.TagihanDAO;
+import models.Penghuni;
 import models.Tagihan;
 import views.TagihanView;
+import views.PenghuniView;
 
 import java.util.List;
 
@@ -12,11 +14,13 @@ public class TagihanController {
     private final TagihanDAO tagihanDAO;
     private final PenghuniDAO penghuniDAO;
     private final TagihanView tagihanView;
+    private final PenghuniView penghuniView;
 
     public TagihanController() {
         tagihanDAO = new TagihanDAO();
         penghuniDAO = new PenghuniDAO();
         tagihanView = new TagihanView();
+        penghuniView = new PenghuniView();
     }
 
     public void showAllTagihan() {
@@ -25,6 +29,8 @@ public class TagihanController {
     }
 
     public void addTagihan() {
+        List<Penghuni> penghuniList = penghuniDAO.getAllPenghuni();
+        penghuniView.showAllPenghuni(penghuniList);
         String[] tagihanData = tagihanView.getTagihanData();
         int idPenghuni = Integer.parseInt(tagihanData[0]);
         String bulan = tagihanData[1];
