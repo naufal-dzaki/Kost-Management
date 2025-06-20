@@ -1,4 +1,3 @@
-// controllers/TagihanController.java (updated)
 package controllers;
 
 import DAO.PenghuniDAO;
@@ -91,7 +90,6 @@ public class TagihanController {
         tagihanView.showAllTagihan(results);
     }
 
-// controllers/TagihanController.java
     public void confirmPayment() {
         List<Object[]> unpaidBills = tagihanDAO.searchTagihan("belum lunas");
         tagihanView.showUnpaidBills(unpaidBills);

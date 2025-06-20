@@ -1,4 +1,3 @@
-// dao/KamarDAO.java
 package DAO;
 
 import config.DatabaseConnection;
@@ -11,7 +10,6 @@ import java.util.List;
 public class KamarDAO {
     private final Connection conn = DatabaseConnection.getConnection();
 
-    // Create
     public boolean insertKamar(Kamar kamar) {
         try {
             String sql = "INSERT INTO kamar (nomor_kamar, harga, status) VALUES (?, ?, ?)";
@@ -26,7 +24,6 @@ public class KamarDAO {
         }
     }
 
-    // Read All
     public List<Kamar> getAllKamar() {
         List<Kamar> kamarList = new ArrayList<>();
         try {
@@ -49,7 +46,6 @@ public class KamarDAO {
         return kamarList;
     }
 
-    // Read by ID
     public Kamar getKamarById(int id) {
         try {
             String sql = "SELECT * FROM kamar WHERE id = ?";
@@ -71,7 +67,6 @@ public class KamarDAO {
         return null;
     }
 
-    // Update
     public boolean updateKamar(Kamar kamar) {
         try {
             String sql = "UPDATE kamar SET nomor_kamar = ?, harga = ?, status = ? WHERE id = ?";
@@ -87,7 +82,6 @@ public class KamarDAO {
         }
     }
 
-    // Delete
     public boolean deleteKamar(int id) {
         try {
             // Cek apakah kamar sedang dihuni
@@ -111,7 +105,6 @@ public class KamarDAO {
         }
     }
 
-    // Search kamar
     public List<Kamar> searchKamar(String keyword) {
         List<Kamar> kamarList = new ArrayList<>();
         try {

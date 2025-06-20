@@ -1,4 +1,3 @@
-// views/PenghuniView.java
 package views;
 
 import java.util.List;

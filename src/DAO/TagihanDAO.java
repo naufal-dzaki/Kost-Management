@@ -1,4 +1,3 @@
-// dao/TagihanDAO.java
 package DAO;
 
 import config.DatabaseConnection;
@@ -11,7 +10,6 @@ import java.util.List;
 public class TagihanDAO {
     private final Connection conn = DatabaseConnection.getConnection();
 
-    // Create
     public boolean insertTagihan(Tagihan tagihan) {
         try {
             String sql = "INSERT INTO tagihan (id_penghuni, bulan, jumlah, status) VALUES (?, ?, ?, ?)";
@@ -27,7 +25,6 @@ public class TagihanDAO {
         }
     }
 
-    // Read All
     public List<Tagihan> getAllTagihan() {
         List<Tagihan> tagihanList = new ArrayList<>();
         try {
@@ -51,7 +48,6 @@ public class TagihanDAO {
         return tagihanList;
     }
 
-    // Read by ID
     public Tagihan getTagihanById(int id) {
         try {
             String sql = "SELECT * FROM tagihan WHERE id = ?";
@@ -74,7 +70,6 @@ public class TagihanDAO {
         return null;
     }
 
-    // Read by Penghuni ID
     public List<Tagihan> getTagihanByPenghuniId(int idPenghuni) {
         List<Tagihan> tagihanList = new ArrayList<>();
         try {
@@ -99,7 +94,6 @@ public class TagihanDAO {
         return tagihanList;
     }
 
-    // Update
     public boolean updateTagihan(Tagihan tagihan) {
         try {
             String sql = "UPDATE tagihan SET id_penghuni = ?, bulan = ?, jumlah = ?, status = ? WHERE id = ?";
@@ -116,7 +110,6 @@ public class TagihanDAO {
         }
     }
 
-    // Delete
     public boolean deleteTagihan(int id) {
         try {
             String sql = "DELETE FROM tagihan WHERE id = ?";
@@ -129,7 +122,6 @@ public class TagihanDAO {
         }
     }
 
-    // Update status tagihan (untuk konfirmasi pembayaran)
     public boolean updateStatusTagihan(int id, String status) {
         try {
             String sql = "UPDATE tagihan SET status = ? WHERE id = ?";
@@ -143,7 +135,6 @@ public class TagihanDAO {
         }
     }
 
-    // Search tagihan dengan join ke tabel penghuni untuk nama
     public List<Object[]> searchTagihan(String keyword) {
         List<Object[]> results = new ArrayList<>();
         try {
@@ -187,7 +178,6 @@ public class TagihanDAO {
         return results;
     }
 
-    // Get tagihan dengan nama penghuni (untuk display)
     public List<Object[]> getTagihanWithPenghuniName() {
         List<Object[]> results = new ArrayList<>();
         try {

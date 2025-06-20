@@ -46,7 +46,7 @@ public class AuthView {
         System.out.println(message);
     }
 
-    public String[] getPenghuniData() {  // Changed return type from String to String[]
+    public String[] getPenghuniData() {  
         System.out.print("Nama lengkap: ");
         String nama = scanner.nextLine().trim();
         System.out.print("No KTP: ");
@@ -54,7 +54,7 @@ public class AuthView {
         return new String[]{nama, noKtp};
     }
 
-    public String[] getPemilikData() {  // Changed return type from String to String[]
+    public String[] getPemilikData() {  
         System.out.print("Nama lengkap: ");
         String nama = scanner.nextLine().trim();
         System.out.print("No HP: ");

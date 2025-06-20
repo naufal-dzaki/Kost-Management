@@ -1,4 +1,3 @@
-// views/MainView.java
 package views;
 
 import models.Tagihan;

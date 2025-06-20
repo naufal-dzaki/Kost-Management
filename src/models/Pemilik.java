@@ -1,4 +1,3 @@
-// models/Pemilik.java
 package models;
 
 public class Pemilik extends User {

@@ -1,4 +1,3 @@
-// dao/PenghuniDAO.java (lengkap)
 package DAO;
 
 import config.DatabaseConnection;
@@ -11,7 +10,6 @@ import java.util.List;
 public class PenghuniDAO {
     private final Connection conn = DatabaseConnection.getConnection();
 
-    // Create
     public boolean insertPenghuni(Penghuni penghuni) {
         try {
             String sql = "INSERT INTO penghuni (id, nama, no_ktp, id_kamar) VALUES (?, ?, ?, ?)";
@@ -47,7 +45,6 @@ public class PenghuniDAO {
         return false;
     }
 
-    // Read All
     public List<Penghuni> getAllPenghuni() {
         List<Penghuni> penghuniList = new ArrayList<>();
         try {
@@ -76,7 +73,6 @@ public class PenghuniDAO {
         return penghuniList;
     }
 
-    // Read by ID
     public Penghuni getPenghuniById(int id) {
         try {
             String sql = "SELECT p.*, u.username FROM penghuni p JOIN users u ON p.id = u.id WHERE p.id = ?";
@@ -105,7 +101,6 @@ public class PenghuniDAO {
         return null;
     }
 
-    // Update
     public boolean updatePenghuni(Penghuni penghuni) {
         try {
             String sql = "UPDATE penghuni SET nama = ?, no_ktp = ?, id_kamar = ? WHERE id = ?";
@@ -125,7 +120,6 @@ public class PenghuniDAO {
         }
     }
 
-    // Delete
     public boolean deletePenghuni(int id) {
         try {
             // Hapus dulu tagihan yang terkait
@@ -145,7 +139,6 @@ public class PenghuniDAO {
         }
     }
 
-    // Search penghuni
     public List<Penghuni> searchPenghuni(String keyword) {
         List<Penghuni> penghuniList = new ArrayList<>();
         try {
@@ -183,7 +176,6 @@ public class PenghuniDAO {
         return penghuniList;
     }
 
-    // Update kamar penghuni
     public boolean updateKamarPenghuni(int idPenghuni, int idKamar) {
         try {
             String sql = "UPDATE penghuni SET id_kamar = ? WHERE id = ?";

@@ -1,4 +1,3 @@
-// controllers/PenghuniController.java (updated)
 package controllers;
 
 import DAO.PenghuniDAO;

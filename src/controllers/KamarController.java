@@ -1,4 +1,3 @@
-// controllers/KamarController.java (updated)
 package controllers;
 
 import DAO.KamarDAO;

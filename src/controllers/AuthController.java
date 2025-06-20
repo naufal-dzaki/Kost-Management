@@ -1,4 +1,3 @@
-// controllers/AuthController.java (updated)
 package controllers;
 
 import models.Pemilik;

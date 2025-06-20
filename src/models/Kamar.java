@@ -4,7 +4,7 @@ public class Kamar {
     private int id;
     private String nomorKamar;
     private int harga;
-    private String status; // kosong / terisi
+    private String status;
 
     public Kamar() {}
 

@@ -5,7 +5,7 @@ public class Tagihan {
     private int idPenghuni;
     private String bulan;
     private int jumlah;
-    private String status; // lunas / belum lunas
+    private String status;
 
     public Tagihan() {}
 

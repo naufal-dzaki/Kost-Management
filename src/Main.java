@@ -1,4 +1,3 @@
-// Main.java (updated)
 import controllers.AuthController;
 import controllers.KamarController;
 import controllers.PenghuniController;
