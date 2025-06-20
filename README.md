@@ -16,13 +16,50 @@ Menerapkan konsep-konsep dasar OOP Java seperti:
 
 ## ✨ Fitur Aplikasi
 
-- 🔐 Login dan registrasi user (penghuni & pemilik)
-- 📝 Input dan pengelolaan data penghuni, kamar, dan tagihan
-- 💳 Pembayaran tagihan
-- 🔍 Pencarian kamar tersedia
-- 📊 Daftar item terjual dan belum terjual
-- 💰 Perhitungan total keuntungan
-- 🚫 Kamar tidak bisa dipesan jika penuh
+### 🔐 Autentikasi
+- Login untuk penghuni dan pemilik kost
+- Registrasi akun baru dengan role penghuni/pemilik
+- Validasi input untuk proses login/register
+
+### 👥 Manajemen Penghuni (Pemilik)
+- Melihat daftar semua penghuni
+- Menambah data penghuni baru
+- Mengedit data penghuni
+- Menghapus data penghuni
+- Mencari penghuni berdasarkan keyword
+- Menempatkan penghuni ke kamar tertentu
+- Memeriksa nomor KTP duplikat
+
+### 🏠 Manajemen Kamar (Pemilik)
+- Melihat daftar semua kamar
+- Menambah kamar baru
+- Mengedit informasi kamar
+- Menghapus kamar
+- Mencari kamar berdasarkan keyword
+- Melihat kamar yang tersedia (status kosong)
+- Update status kamar (kosong/terisi)
+
+### 💰 Manajemen Tagihan (Pemilik)
+- Melihat semua tagihan beserta informasi penghuni
+- Menambah tagihan baru untuk penghuni
+- Mengedit informasi tagihan
+- Menghapus tagihan
+- Mencari tagihan berdasarkan keyword
+- Konfirmasi pembayaran tagihan
+- Filter tagihan yang belum lunas
+
+### 👤 Menu Penghuni
+- Melihat profil pribadi (nama, no KTP, kamar)
+- Melihat daftar tagihan pribadi
+- Mendaftar untuk mendapatkan kamar
+- Keluar dari kamar (mengosongkan kamar)
+- Logout dari sistem
+
+### 🔄 Sistem Terintegrasi
+- Update otomatis status kamar ketika penghuni masuk/keluar
+- Validasi input untuk semua operasi CRUD
+- Konfirmasi untuk operasi penting (hapus, keluar kamar, dll)
+- Tampilan tabel yang terformat rapi untuk data
 
 ## 🗂️ Struktur Folder
 
@@ -30,6 +67,7 @@ Menerapkan konsep-konsep dasar OOP Java seperti:
   - `models/` : Class yang merepresentasikan entitas (Penghuni, Pemilik, Kamar, Tagihan, dsb.)
   - `controllers/` : Class yang menangani logika seperti login, register, CRUD, autentikasi
   - `database/` : Koneksi dan konfigurasi database (JDBC)
+  - `DAO/` :  Data Access Object, berisi class untuk mengelola operasi database (insert, update, delete, select) untuk setiap model
   - `views/` : Tampilan berbasis CLI dan interaksi pengguna
   - `Main.java` : Entry point aplikasi
 - `lib/` : Menyimpan dependency eksternal (jika diperlukan)
